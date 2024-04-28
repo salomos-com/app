@@ -53,3 +53,23 @@ Voice recognition and speech recognition are similar in that a front-end audio d
 While speech recognition will recognize almost any speech (depending on language, accents, etc.), voice recognition applies to a machine’s ability to identify a specific users’ voice. 
 
 
+
+
+[​Automatyzacja procesów biznesowych – co to jest? Dobre praktyki](https://cyrekdigital.com/pl/baza-wiedzy/automatyzacja-procesow-biznesowych/#:~:text=Automatyzacja%20proces%C3%B3w%20biznesowych%20%28znana%20te%C5%BC%20pod%20angielskim%20skr%C3%B3tem,kr%C3%B3tko%2C%20jest%20to%20zast%C4%85pienie%20manualnych%20prac%20rozwi%C4%85zaniami%20automatycznymi.)
+
+> ## Metody automatyzacji procesów biznesowych
+> 
+> Do automatyzacji procesów biznesowych można stosować wiele różnorodnych metod. Najczęściej jednak wykorzystuje się sposoby i narzędzia, takie jak:
+> 
+> -   Robotyzacja procesów biznesowych (RPA, robotic process automation) polega na wykorzystaniu specjalnego oprogramowania do stworzenia robotów wykonujących powtarzalne zadania – wprowadzania danych, przetwarzania standardowych transakcji czy zarządzanie odpowiedziami na często zadawane pytania.
+> -   Intelligent Process Automation (IPA, inteligentna automatyzacja procesów) łączy technologie RPA z zaawansowaną analizą danych, uczeniem maszynowym i sztuczną inteligencją, co pozwala automatyzować bardziej skomplikowane procesy biznesowe.
+> -   Integration Platform as a Service (iPaaS, dosłownie „platforma integracyjna jako usługa”) to istniejących w chmurze zestaw narzędzi i usług umożliwiających łatwe tworzenie, wdrażanie i zarządzanie połączeniami między różnymi źródłami danych i aplikacjami. Jest stosowane do integracji różnych systemów i aplikacji w organizacji.
+> -   Business Rules Management System (BRMS) służy do definiowania, zarządzania i wdrażania reguł biznesowych w pełni zautomatyzowany sposób.
+> -   Automatyzacja procesów związanych z integracją danych, takich jak ekstrakcja, transformacja i ładowanie (ETL), pozwala efektywnie zarządzać danymi w organizacji poprzez synchronizację informacji z różnych źródeł.
+> -   Document Management Systems to systemy zarządzania dokumentami. Wykorzystuje się je do automatyzacji procesów związanych z gromadzeniem, klasyfikacją, przetwarzaniem, archiwizacją i udostępnianiem dokumentów w organizacji.
+> -   [Systemy CRM](https://cyrekdigital.com/pl/baza-wiedzy/system-crm/) pozwalają zautomatyzować procesy związane z zarządzaniem relacjami z klientami. Dzięki nim można np. zarządzać kontaktami, śledzić historii interakcji z klientami oraz przewidywać ich potrzeby.
+> -   Oprogramowanie do zarządzania procesami biznesowymi (BPM) koncentruje się na całym cyklu życia procesu biznesowego, od modelowania i analizy przez implementację, do monitorowania i optymalizacji. Służy do tworzenia map przepływów pracy, które mogą być udoskonalane w celu zwiększenia wydajności organizacji.
+> -   Sztuczną inteligencję i uczenie maszynowe wykorzystuje się do automatyzacji zadań wymagających zdolności do adaptacji i nauki na podstawie danych. Mogą być stosowane np. do automatycznego podejmowania decyzji, przewidywania wyników czy personalizacji doświadczeń klientów.
+> -   Automatyzacja za pomocą integracji API polega na łączeniu różnych systemów i aplikacji za pomocą API (Application Programming Interface), co pozwala płynnie wymieniać dane między różnorodnymi technologiami, co jest ważne w firmach korzystających z wielu rodzajów oprogramowania.
+> -   Workflow automation (automatyzacja przepływów pracy) polega na automatyzacji konkretnych sekwencji działań (przepływów pracy) w ramach określonych procesów biznesowych. Stosuje się do tego systemy workflow, które są szczególnie przydatne w organizacjach ze złożonymi strukturami zadaniowymi i procesowymi.
+
