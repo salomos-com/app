@@ -43,6 +43,17 @@ In summary, Salomos represents the fusion of voice technology, NLP, SQL, and API
 [What Are Smart Operations? - Oracle](https://www.oracle.com/scm/smart-operations/)
 
 
+## NLP to SQL
+
++ [ln2sql - PyPI](https://pypi.org/project/ln2sql/)
++ [anaiscmateus/OpenAI-NLPtoSQL: This program is designed to translate natural language statements into SQL queries using OpenAI API, pandas library, and sqlalchemy. It is useful for those who are not familiar with SQL syntax and want to query databases using natural language.](https://github.com/anaiscmateus/OpenAI-NLPtoSQL)
++ [Setting a Natural Language to SQL Code Generator with Python | by Rami Krispin | Medium](https://medium.com/@rami.krispin/setting-a-natural-language-to-sql-code-generator-with-python-d267f40d7218)
++ 
+
+
+
+
+
 
 ## What is Voice Recognition?
 
