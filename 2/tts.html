@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Text-to-Speech Example</title>
+</head>
+<body>
+<button id="myvoice">Play TTS</button>
+
+<script>
+    const listenBtn = document.getElementById('myvoice');
+    listenBtn.addEventListener('click', () => {
+        const audio = new Audio();
+        audio.src = 'http://translate.google.com/translate_tts?ie=utf-8&tl=en&q=Hello%20World';
+        audio.play();
+    });
+</script>
+</body>
+</html>

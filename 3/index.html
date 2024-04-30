@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech-to-Text Input</title>
+</head>
+<body>
+<input type="text" id="myInput" placeholder="Speak here...">
+<button id="startBtn">Start Listening</button>
+<div id="output"></div>
+
+<script>
+    const startButton = document.getElementById("startBtn");
+    const outputDiv = document.getElementById("output");
+
+    if ("webkitSpeechRecognition" in window) {
+        const recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+
+        startButton.addEventListener("click", () => {
+            recognition.start();
+        });
+
+        recognition.onresult = (event) => {
+            const spokenText = event.results[0][0].transcript;
+            document.getElementById("myInput").value = spokenText;
+            outputDiv.textContent = `You said: ${spokenText}`;
+        };
+    } else {
+        outputDiv.textContent = "Speech recognition not supported.";
+    }
+</script>
+</body>
+</html>
