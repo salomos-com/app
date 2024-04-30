@@ -1,5 +1,7 @@
 # test
 
+<div id="google_translate_element"></div>
+
 ```
 
 ```
@@ -35,3 +37,14 @@ Source: Conversation with Bing, 4/30/2024
 (3) How to get value / content in JSON object with python. https://stackoverflow.com/questions/11885284/how-to-get-value-content-in-json-object-with-python.
 (4) python 3.x - How can I write to JSON file, without deleting all the .... https://stackoverflow.com/questions/63112358/how-can-i-write-to-json-file-without-deleting-all-the-content-in-it.
 (5) undefined. http://docs.python.org/library/json.html.
+
+
+
+
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({ pageLanguage: 'de', includedLanguages: 'de,pl', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

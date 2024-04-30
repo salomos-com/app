@@ -1,5 +1,9 @@
 # test
 
+<div id="google_translate_element"></div>
+
+
+
 ```
 write code in python to translate a natural NLP sentence into an SQL query using dedicated NLP-to-SQL libraries or services.
 ```
@@ -187,3 +191,14 @@ Source: Conversation with Bing, 4/30/2024
 
 
 ## SQL Database:
+
+
+
+
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({ pageLanguage: 'de', includedLanguages: 'de,pl', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
