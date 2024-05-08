@@ -98,6 +98,138 @@ Let's delve into how this innovative technology can revolutionize operational ac
 In summary, Salomos represents the fusion of voice technology, NLP, SQL, and API providers, empowering businesses to operate smarter and more efficiently.
 
 
+## PL
+
+
+ jak zautomatyzwoać procesy i z perspektywy software developera łatwiej ujarzmić procesy poprzez STT -> NLP -> SQL -> API. Co oznacza, że mogę zautomatyzyowac procesy poprzez realizację zapytań w kolejkach, poprzez zapytanie SQL mam dostęp do źródła danych i usług (poprzez adapter SQL->API)
+
+od technicznej strony trigger może być obsługiwany na poziomie funkcji zaimplementowanej w SQL: 
+
+    CREATE TRIGGER MyTrigger
+     AFTER INSERT ON MyTable
+     FOR EACH ROW
+     BEGIN
+     -- Blok kodu SQL
+     END;
+
+Albo okresowo w PostgreSQL:
+
+    SELECT cron.schedule('5 minutes', $$UPDATE my_table SET my_column = my_column + 1$$);
+
+Ma to tę zaletę, że można na jednej warstwie aplikacji udokumentować procesy w formie zapytań SQL
+
+
+
+
+
+ W systemach baz danych SQL triggery są zwykle uruchamiane przez zdarzenia w tabeli (tj. INSERT, UPDATE, DELETE), a nie na podstawie upływu czasu. Jeśli potrzebujesz wykonywać operacje bazodanowe automatycznie w określonych odstępach czasu, powinieneś wykorzystać inne mechanizmy, takie jak zadania zaplanowane (ang. scheduled jobs) lub funkcje cron w systemie operacyjnym.
+
+Niektóre systemy zarządzania bazami danych, takie jak MySQL, PostgreSQL, Oracle, SQL Server, oferują funkcjonalność zaplanowanych zadań, które można wykorzystać do tego celu. Oto jak można to zrealizować w kilku popularnych systemach baz danych:
+
+### 1. **MySQL**
+
+W MySQL możesz użyć mechanizmu zwanego "Event Scheduler". Przykładowo, aby stworzyć zdarzenie, które wykonuje się co minutę:
+```sql
+CREATE EVENT my_event
+ON SCHEDULE EVERY 1 MINUTE
+DO
+  UPDATE my_table SET my_column = my_column + 1;
+```
+Możesz również ustawić zdarzenie na wykonanie jednorazowe w przyszłości:
+```sql
+CREATE EVENT my_once_event
+ON SCHEDULE AT '2023-12-31 23:59:00'
+DO
+  INSERT INTO my_table(name, created_at) VALUES ('Year End', NOW());
+```
+
+### 2. **PostgreSQL**
+
+PostgreSQL nie ma wbudowanej funkcji harmonogramowania zadań, ale możesz użyć zewnętrznych narzędzi takich jak `pg_cron` dla serwera PostgreSQL:
+```sql
+SELECT cron.schedule('5 minutes', $$UPDATE my_table SET my_column = my_column + 1$$);
+```
+
+### 3. **Oracle**
+
+W Oracle możesz użyć DBMS_SCHEDULER:
+```sql
+BEGIN
+  DBMS_SCHEDULER.create_job (
+    job_name        => 'my_job',
+    job_type        => 'PLSQL_BLOCK',
+    job_action      => 'BEGIN UPDATE my_table SET my_column = 100; END;',
+    start_date      => SYSTIMESTAMP,
+    repeat_interval => 'freq=minutely; interval=1',
+    end_date        => NULL,
+    enabled         => TRUE);
+END;
+```
+Lub dla jednorazowego zadania:
+```sql
+BEGIN
+  DBMS_SCHEDULER.create_job (
+    job_name        => 'one_time_job',
+    job_type        => 'PLSQL_BLOCK',
+    job_action      => 'BEGIN INSERT INTO my_table VALUES (1, ''test'', SYSDATE); END;',
+    start_date      => TO_TIMESTAMP_TZ('2023-12-31 23:59:00 TZD', 'YYYY-MM-DD HH24:MI:SS TZR'),
+    repeat_interval => NULL,
+    enabled         => TRUE);
+END;
+```
+
+### 4. **Microsoft SQL Server**
+
+W SQL Server korzysta się z SQL Server Agent:
+```sql
+-- Create a job
+EXEC dbo.sp_add_job @job_name = N'MyJob';  
+
+-- Add a job step that contains the command
+EXEC sp_add_jobstep @job_name = N'MyJob', @step_name = N'MyStep',  
+    @subsystem = N'TSQL',  
+    @command = N'UPDATE my_table SET my_column = my_column + 1;',   
+    @retry_attempts = 0;
+
+-- Schedule the job to run every minute
+EXEC dbo.sp_add_schedule @schedule_name = N'MySchedule', 
+    @freq_type = 4, @freq_interval = 1, @freq_subday_type = 4, @freq_subday_interval = 1;
+EXEC sp_attach_schedule @job_name = N'MyJob', @schedule_name = N'MySchedule';
+  
+-- Enable the job
+EXEC dbo.sp_update_job @job_name = N'MyJob', @enabled = 1;
+```
+
+W przypadku każdego systemu baz danych, ważne jest zrozumienie szczegółów implementacyjnych oraz potencjalnego wpływu na wydajność bazy danych. Zadania zaplanowane działają na poziomie serwera baz danych i są niezależne od aplikacji, co czyni je efektywnym rozwiązaniem do wykonywania operacji cyklicznych.
+
+
+
+
+
+Triggery są implementowane na poziomie bazy danych i wykonują określone funkcje SQL w odpowiedzi na zdarzenia takie jak INSERT, UPDATE, lub DELETE. Oto kilka aspektów technicznych związanych z triggerami:
+
+1. **Definicja Trigera**: Tworzenie triggera zwykle rozpoczyna się od określenia momentu jego uruchomienia (BEFORE, AFTER, INSTEAD OF) w zależności od operacji (INSERT, UPDATE, DELETE). Na przykład:
+   ```sql
+   CREATE TRIGGER MyTrigger
+   AFTER INSERT ON MyTable
+   FOR EACH ROW
+   BEGIN
+     -- Blok kodu SQL
+   END;
+   ```
+
+2. **Korzystanie ze starszych i nowych wartości**: W triggerech, które reagują na UPDATE, często można uzyskać dostęp do starych i nowych wartości rekordów korzystając z specjalnych pseudonimów. Na przykład `OLD.col_name` i `NEW.col_name` pozwalają porównać wartości przed i po aktualizacji.
+
+3. **Zakres wykonania**: Triggery mogą być ustawione na wywołanie dla każdego rekordu (`FOR EACH ROW`) lub jednokrotnie dla całej instrukcji (`FOR EACH STATEMENT`), co zależy od systemu zarządzania bazą danych.
+
+4. **Unikanie nieskończonych pętli rekursywnych**: Trzeba uważać, żeby trigger nie wywołał innego zdarzenia, które z kolei uruchomi ten sam lub inny trigger, co może prowadzić do nieskończonej rekursji i zablokowania bazy danych.
+
+5. **Wywoływanie funkcji**: W triggere można wywołać zdefiniowane wcześniej funkcje lub procedury składowane, aby zrealizować bardziej skomplikowaną logikę.
+
+6. **Zarządzanie wyrażeniami warunkowymi**: Można użyć instrukcji IF lub CASE wewnątrz triggera, aby zdecydować, jakie działania należy podjąć w zależności od spełnienia określonych warunków.
+
+
+
 ## Docs
 
 [Voice Assistant Use Cases & Examples for Business](https://masterofcode.com/blog/voice-assistant-use-cases-business-implementations-of-vuis-in-2021)
